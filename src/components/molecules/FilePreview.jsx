@@ -67,9 +67,9 @@ const FilePreview = ({ file, className, ...props }) => {
       </div>
       
       <div className="flex-1 min-w-0">
-        <h4 className="text-white font-medium text-sm truncate mb-1">{file.name}</h4>
+<h4 className="text-white font-medium text-sm truncate mb-1">{file.name}</h4>
         <div className="flex items-center space-x-2 text-xs text-gray-400">
-          <span>{formatFileSize(file.size)}</span>
+<span>{formatFileSize(file.size)}</span>
           <span>•</span>
           <Badge variant="default" size="sm">
             {getFileTypeLabel(file.type)}
@@ -84,7 +84,7 @@ const FilePreview = ({ file, className, ...props }) => {
           {file.status === "error" && <ApperIcon name="X" className="w-3 h-3 mr-1" />}
           {file.status.charAt(0).toUpperCase() + file.status.slice(1)}
         </Badge>
-        {file.uploadedAt && (
+{file.uploadedAt && (
           <span className="text-xs text-gray-500">
             {new Date(file.uploadedAt).toLocaleDateString()}
           </span>

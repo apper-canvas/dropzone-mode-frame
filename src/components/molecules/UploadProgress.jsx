@@ -61,7 +61,7 @@ const UploadProgress = ({
           </div>
           
           <div className="flex-1 min-w-0">
-            <h4 className="text-white font-medium text-sm truncate">{file.name}</h4>
+<h4 className="text-white font-medium text-sm truncate">{file.name}</h4>
             <p className="text-gray-400 text-xs">{formatFileSize(file.size)}</p>
           </div>
         </div>

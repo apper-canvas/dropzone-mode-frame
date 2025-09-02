@@ -6,8 +6,14 @@ import FileList from "@/components/organisms/FileList";
 import UploadSummary from "@/components/organisms/UploadSummary";
 import HistoryPanel from "@/components/organisms/HistoryPanel";
 import { uploadService } from "@/services/api/uploadService";
+import { useContext } from 'react';
+import { AuthContext } from '@/App';
+import { useSelector } from 'react-redux';
 const FileUploader = () => {
-const [files, setFiles] = useState([]);
+  const { logout } = useContext(AuthContext);
+  const { user } = useSelector((state) => state.user);
+  
+  const [files, setFiles] = useState([]);
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -164,21 +170,42 @@ const loadFiles = async () => {
     loadFiles();
   };
 
-  return (
+return (
     <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
-        {/* Header */}
+        {/* Header with User Info and Logout */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center space-y-4"
+          className="flex justify-between items-center"
         >
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            DropZone
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Upload and manage your files with ease. Drag, drop, and watch the magic happen.
-          </p>
+          <div className="text-center flex-1 space-y-4">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              DropZone
+            </h1>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Upload and manage your files with ease. Drag, drop, and watch the magic happen.
+            </p>
+          </div>
+          
+          <div className="flex items-center space-x-4">
+            {user && (
+              <div className="text-right">
+                <p className="text-white text-sm font-medium">
+                  {user.firstName} {user.lastName}
+                </p>
+                <p className="text-gray-400 text-xs">
+                  {user.emailAddress}
+                </p>
+              </div>
+            )}
+            <button
+              onClick={logout}
+              className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors text-sm"
+            >
+              Logout
+            </button>
+          </div>
         </motion.div>
 
         {/* Drop Zone */}
